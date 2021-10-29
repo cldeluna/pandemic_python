@@ -1,0 +1,22 @@
+
+! For device {{ cfg['host'] }}
+! Configuration Generated {{ dattim }}
+
+{% for vlan2remove in cfg['no_vlan'] %}
+no vlan {{ vlan2remove }}
+{% endfor -%}
+
+{% if cfg['new_vlans'] %}
+{% for newvlan in cfg['new_vlans'] %}
+{% for num, name in newvlan.items() %}
+vlan {{ num }}
+  name {{ name }}
+{% endfor -%}
+{% endfor -%}
+{% else %}
+! No New Vlans to Configure
+{% endif %}
+
+! Remove this once working
+! Raw Data
+{{ cfg | pprint}}
